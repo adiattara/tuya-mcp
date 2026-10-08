@@ -1,0 +1,47 @@
+[project]
+name = "tuya-mcp"
+version = "0.1.0"
+description = "MCP server to control Tuya / Smart Life devices through the official Tuya Cloud API"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "adiattara" }]
+keywords = ["mcp", "tuya", "smart-life", "smart-home", "iot"]
+dependencies = [
+    "mcp>=2.3,<3",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+tuya-mcp = "tuya_mcp.server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.6",
+    "mypy>=1.10",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tuya_mcp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
